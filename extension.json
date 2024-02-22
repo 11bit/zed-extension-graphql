@@ -1,0 +1,9 @@
+{
+  "name": "GraphQL",
+  "version": "0.0.1",
+  "authors": [
+    "Ivan Buryak <ivan.buryak@gmail.com>"
+  ],
+  "description": "GraphQL extension for Zed",
+  "repository": "https://github.com/11bit/zed-extension-graphql"
+}
