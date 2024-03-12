@@ -1,6 +1,6 @@
 name = "GraphQL"
 grammar = "graphql"
-path_suffixes = ["graphql"]
+path_suffixes = ["graphql", "gql"]
 line_comments = ["# "]
 autoclose_before = "}])"
 brackets = [
