@@ -1,0 +1,12 @@
+[package]
+name = "zed_graphql"
+version = "0.0.3"
+edition = "2021"
+publish = false
+
+[lib]
+path = "src/graphql.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.0.6"
