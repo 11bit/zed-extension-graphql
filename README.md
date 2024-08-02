@@ -19,4 +19,4 @@ schema: 'schema.graphql' # or 'http://localhost:9876/graphql'
 documents: 'src/**/*.{graphql,js,ts,jsx,tsx}'
 ```
 
-For further details please refer to the documentation for [`graphql-config`](https://the-guild.dev/graphql/config)
+Several file formats and configuration options are available. For further details please refer to the documentation for [`graphql-config`](https://the-guild.dev/graphql/config)
