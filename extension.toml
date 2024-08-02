@@ -10,7 +10,6 @@ repository = "https://github.com/11bit/zed-extension-graphql"
 name = "GraphQL Language Server"
 language = "GraphQL"
 languages = [
-    "GraphQL",
     "JavaScript",
     "JSX",
     "TypeScript",
