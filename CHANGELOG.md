@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.0.0 - 2024-08-02
+
+- Add GraphQL language server with automcompletion and documentation support. Thanks @affanshahid
+
 # 0.0.3 - 2024-06-26
 
 - Add `graphqls` file extension for schema files. Thanks @isaacd9
