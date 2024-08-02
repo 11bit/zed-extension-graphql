@@ -6,7 +6,7 @@ authors = ["Ivan Buryak <ivan.buryak@gmail.com>"]
 description = "GraphQL extension for Zed"
 repository = "https://github.com/11bit/zed-extension-graphql"
 
-[language_servers.graphql-language-server]
+[language_servers.graphql]
 name = "GraphQL Language Server"
 language = "GraphQL"
 languages = [
@@ -20,7 +20,7 @@ languages = [
     "Svelte",
 ]
 
-[language_servers.graphql-language-server.language_ids]
+[language_servers.graphql.language_ids]
 "Astro" = "astro"
 "JSX" = "javascriptreact"
 "JavaScript" = "javascript"

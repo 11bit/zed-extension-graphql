@@ -1,5 +1,5 @@
 use std::{env, fs};
-use zed_extension_api::{self as zed, Result};
+use zed_extension_api::{self as zed, settings::LspSettings, Result};
 
 const SERVER_PATH: &str = "node_modules/.bin/graphql-lsp";
 const PACKAGE_NAME: &str = "graphql-language-service-cli";
@@ -62,6 +62,14 @@ impl zed::Extension for GraphQLExtension {
         worktree: &zed_extension_api::Worktree,
     ) -> zed_extension_api::Result<zed_extension_api::Command> {
         let server_path = self.server_script_path(language_server_id)?;
+
+        let config_dir = LspSettings::for_worktree(language_server_id.as_ref(), worktree)
+            .ok()
+            .and_then(|lsp_settings| lsp_settings.settings)
+            .and_then(|settings| settings.get("config_dir").cloned())
+            .and_then(|r| r.as_str().map(|s| s.to_string()))
+            .unwrap_or(worktree.root_path().to_string());
+
         Ok(zed::Command {
             command: zed::node_binary_path()?,
             args: vec![
@@ -74,7 +82,7 @@ impl zed::Extension for GraphQLExtension {
                 "-m".to_string(),
                 "stream".to_string(),
                 "-c".to_string(),
-                worktree.root_path().to_string(),
+                config_dir,
             ],
             env: Default::default(),
         })

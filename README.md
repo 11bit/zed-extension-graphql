@@ -20,3 +20,20 @@ documents: 'src/**/*.{graphql,js,ts,jsx,tsx}'
 ```
 
 Several file formats and configuration options are available. For further details please refer to the documentation for [`graphql-config`](https://the-guild.dev/graphql/config)
+
+### Customizing the config directory
+
+By default, the LSP attempts to load a config file from the workspace root directory. To specify the config file directory add the following to Zed settings:
+```json
+{
+  // ...
+
+  "lsp": {
+    "graphql": {
+      "settings": {
+        "config_dir": "./nested-directory"
+      }
+    }
+  }
+}
+```
