@@ -323,7 +323,7 @@ dependencies = [
 
 [[package]]
 name = "zed_graphql"
-version = "0.0.3"
+version = "1.0.1"
 dependencies = [
  "zed_extension_api",
 ]
