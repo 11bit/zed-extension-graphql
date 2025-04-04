@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.0.1 - 2025-04-04
+
+- Make it work on windows
+
 # 1.0.0 - 2024-08-02
 
 - Add GraphQL language server with auto-completion and documentation support. Thanks @affanshahid
