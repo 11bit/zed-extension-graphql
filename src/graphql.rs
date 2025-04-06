@@ -1,7 +1,7 @@
 use std::{env, fs};
 use zed_extension_api::{self as zed, settings::LspSettings, Result};
 
-const SERVER_PATH: &str = "node_modules/.bin/graphql-lsp";
+const SERVER_PATH: &str = "node_modules/graphql-language-service-cli/bin/graphql.js";
 const PACKAGE_NAME: &str = "graphql-language-service-cli";
 
 struct GraphQLExtension;
