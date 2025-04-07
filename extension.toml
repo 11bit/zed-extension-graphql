@@ -1,6 +1,6 @@
 id = "graphql"
 name = "GraphQL"
-version = "1.0.1"
+version = "1.0.2"
 schema_version = 1
 authors = ["Ivan Buryak <ivan.buryak@gmail.com>"]
 description = "GraphQL extension for Zed"

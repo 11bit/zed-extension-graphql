@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.0.2 - 2025-04-06
+
+- Fix GraphQL language server not starting on Windows
+
 # 1.0.1 - 2025-04-04
 
 - Make it work on windows
