@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.0.3 - 2025-09-30
+
+- Bump extension API, remove windows path workaround. Thanks @kubkon!
+
 # 1.0.2 - 2025-04-06
 
 - Fix GraphQL language server not starting on Windows
