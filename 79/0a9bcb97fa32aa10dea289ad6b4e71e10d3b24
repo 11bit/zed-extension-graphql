@@ -1,0 +1,29 @@
+src/graphql.rs
+  f14806cf952c2b53 4,87
+CHANGELOG.md
+  f14806cf952c2b53 3-6
+Cargo.toml
+  f14806cf952c2b53 3
+extension.toml
+  f14806cf952c2b53 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "790a9bcb97fa32aa10dea289ad6b4e71e10d3b24",
+  "prompts": {
+    "f14806cf952c2b53": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c28af3d1-e2b5-4675-b881-9e999b44d58a",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Ivan Buryak",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 4,
+      "accepted_lines": 8,
+      "overriden_lines": 0
+    }
+  }
+}
