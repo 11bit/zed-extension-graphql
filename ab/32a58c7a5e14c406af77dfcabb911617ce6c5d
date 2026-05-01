@@ -1,0 +1,36 @@
+LICENSE
+  667acb1b4dd66c93 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "ab32a58c7a5e14c406af77dfcabb911617ce6c5d",
+  "prompts": {
+    "667acb1b4dd66c93": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6c851acb-571f-40ea-844f-39edabe15304",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Ivan Buryak",
+      "messages": [],
+      "total_additions": 21,
+      "total_deletions": 0,
+      "accepted_lines": 21,
+      "overriden_lines": 0
+    },
+    "f14806cf952c2b53": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c28af3d1-e2b5-4675-b881-9e999b44d58a",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Ivan Buryak",
+      "messages": [],
+      "total_additions": 43,
+      "total_deletions": 0,
+      "accepted_lines": 42,
+      "overriden_lines": 1
+    }
+  }
+}
