@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.0.4 - 2026-05-01
+
+- Fix language server failing to start on Node.js 22+ with `Cannot find module 'core-js/es6'`. Invoke `dist/cli.js` directly to bypass the deprecated `@babel/polyfill` require in the upstream `bin/graphql.js` wrapper.
+
 # 1.0.3 - 2025-09-30
 
 - Bump extension API, remove windows path workaround. Thanks @kubkon!
