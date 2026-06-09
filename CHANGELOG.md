@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.0.5 - 2026-06-09
+
+- Fix symbol picker (outline) showing nothing in GraphQL schema files. Capture all type system definitions and extensions instead of selection fields. Thanks @rishitells! #24
+
 # 1.0.4 - 2026-05-01
 
 - Fix language server failing to start on Node.js 22+ with `Cannot find module 'core-js/es6'`. Invoke `dist/cli.js` directly to bypass the deprecated `@babel/polyfill` require in the upstream `bin/graphql.js` wrapper.
