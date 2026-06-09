@@ -37,3 +37,16 @@ By default, the LSP attempts to load a config file from the workspace root direc
   }
 }
 ```
+
+## Releasing
+
+1. Bump `version` in `extension.toml`.
+2. Add a matching entry to `CHANGELOG.md` (newest at the top, `# <version> - <date>`).
+3. Commit and merge to `main`.
+4. Tag the release and push the tag:
+   ```sh
+   git tag v<version>   # e.g. v1.0.5, must match extension.toml
+   git push origin v<version>
+   ```
+
+Pushing a `v*` tag triggers the [`release.yml`](.github/workflows/release.yml) workflow, which automatically opens a PR against [`zed-industries/extensions`](https://github.com/zed-industries/extensions) to publish the new version. Once a Zed maintainer merges that PR, the update rolls out to users.
