@@ -1,0 +1,21 @@
+extension.toml
+  s_cca5af8590c123::t_56c83682ae01d4 3
+languages/graphql/outline.scm
+  s_cca5af8590c123::t_d5f7fc9eae13cc 1,6,11-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "bf24b4113512911f229dc6431c384d088ea57793",
+  "prompts": {},
+  "sessions": {
+    "s_cca5af8590c123": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6876308e-e010-4d70-a326-1d2b58e4fb26",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Buryak <ivan.buryak@gmail.com>"
+    }
+  }
+}
