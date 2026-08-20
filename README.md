@@ -38,6 +38,31 @@ By default, the LSP attempts to load a config file from the workspace root direc
 }
 ```
 
+### Using a local language server
+
+By default, the extension installs and manages its own copy of [`graphql-language-service-cli`](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli) via npm. To use a locally provided server instead (e.g. from Nix, direnv, mise, or asdf environments, or when working offline), the extension resolves the server in this order:
+
+1. The binary configured in Zed settings:
+   ```json
+   {
+     "lsp": {
+       "graphql": {
+         "binary": {
+           "path": "/usr/local/bin/graphql-lsp",
+           // optional, defaults to ["server", "-m", "stream", "-c", "<config_dir>"]
+           "arguments": ["server", "-m", "stream"],
+           // optional, defaults to { "GRAPHQL_NO_NAME_WARNING": "true" }
+           "env": { "GRAPHQL_NO_NAME_WARNING": "true" }
+         }
+       }
+     }
+   }
+   ```
+2. A `graphql-lsp` binary found on the worktree's `PATH`.
+3. The extension-managed npm installation (the default behavior).
+
+When a local server is selected, no npm version check or installation is performed.
+
 ## Releasing
 
 1. Bump `version` in `extension.toml`.

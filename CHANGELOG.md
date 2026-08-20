@@ -1,5 +1,9 @@
 # Changelog
 
+# Unreleased
+
+- Prefer a locally provided language server over the extension-managed npm install: use `lsp.graphql.binary.path` from settings when configured (honoring `binary.arguments` and `binary.env`), otherwise a `graphql-lsp` binary found on the worktree PATH. The npm-managed `graphql-language-service-cli` remains the fallback. #26
+
 # 1.0.5 - 2026-06-09
 
 - Fix symbol picker (outline) showing nothing in GraphQL schema files. Capture all type system definitions and extensions instead of selection fields. Thanks @rishitells! #24
