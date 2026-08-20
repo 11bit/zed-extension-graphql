@@ -1,0 +1,23 @@
+README.md
+  s_156eae2feda6a2::t_661d1c9c508c18 41-65
+src/graphql.rs
+  s_156eae2feda6a2::t_41d30e37f1c75c 6,65-73,75,80-106,109-110
+CHANGELOG.md
+  s_156eae2feda6a2::t_fc4eb0f8b03002 3-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "2f771996f6ffb634c1d3c18ff4254c005d628f30",
+  "prompts": {},
+  "sessions": {
+    "s_156eae2feda6a2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "26dae389-0bc6-43f9-b8f9-c8dffef9ef6c",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Ivan Buryak <ivan.buryak@gmail.com>"
+    }
+  }
+}
