@@ -50,9 +50,9 @@ By default, the extension installs and manages its own copy of [`graphql-languag
          "binary": {
            "path": "/usr/local/bin/graphql-lsp",
            // optional, defaults to ["server", "-m", "stream", "-c", "<config_dir>"]
-           "arguments": ["server", "-m", "stream"],
-           // optional, defaults to { "GRAPHQL_NO_NAME_WARNING": "true" }
-           "env": { "GRAPHQL_NO_NAME_WARNING": "true" }
+           "arguments": ["server", "-m", "stream", "-c", "/path/to/config-dir"],
+           // optional, merged with the default { "GRAPHQL_NO_NAME_WARNING": "true" }
+           "env": { "NODE_OPTIONS": "--max-old-space-size=4096" }
          }
        }
      }
@@ -71,6 +71,8 @@ By default, the extension installs and manages its own copy of [`graphql-languag
    }
    ```
 3. The extension-managed npm installation (the default behavior — used whenever neither option above is configured).
+
+`binary.arguments` fully replaces the default arguments, including `-c <config_dir>` — if you also use the `config_dir` setting, pass `-c` yourself. `binary.env` is merged with the defaults, with your values taking precedence. Both apply to whichever server ends up selected, including the extension-managed npm fallback (where arguments are appended after the script path).
 
 When a local server is selected, no npm version check or installation is performed.
 

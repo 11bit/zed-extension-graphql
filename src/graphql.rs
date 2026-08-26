@@ -90,9 +90,11 @@ impl zed::Extension for GraphQLExtension {
             "-c".to_string(),
             config_dir,
         ];
-        let env = binary_env
-            .map(|env| env.into_iter().collect::<Vec<_>>())
-            .unwrap_or_else(|| vec![("GRAPHQL_NO_NAME_WARNING".to_string(), "true".to_string())]);
+        let mut env = vec![("GRAPHQL_NO_NAME_WARNING".to_string(), "true".to_string())];
+        if let Some(user_env) = binary_env {
+            env.retain(|(key, _)| !user_env.contains_key(key));
+            env.extend(user_env);
+        }
 
         let system_binary = if use_system_binary {
             worktree.which(BINARY_NAME)
