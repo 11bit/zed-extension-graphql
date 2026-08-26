@@ -72,6 +72,12 @@ impl zed::Extension for GraphQLExtension {
             None => (None, None, None),
         };
 
+        let use_system_binary = server_settings
+            .as_ref()
+            .and_then(|settings| settings.get("use_system_binary"))
+            .and_then(|value| value.as_bool())
+            .unwrap_or(false);
+
         let config_dir = server_settings
             .and_then(|settings| settings.get("config_dir").cloned())
             .and_then(|r| r.as_str().map(|s| s.to_string()))
@@ -88,7 +94,13 @@ impl zed::Extension for GraphQLExtension {
             .map(|env| env.into_iter().collect::<Vec<_>>())
             .unwrap_or_else(|| vec![("GRAPHQL_NO_NAME_WARNING".to_string(), "true".to_string())]);
 
-        if let Some(path) = binary_path.or_else(|| worktree.which(BINARY_NAME)) {
+        let system_binary = if use_system_binary {
+            worktree.which(BINARY_NAME)
+        } else {
+            None
+        };
+
+        if let Some(path) = binary_path.or(system_binary) {
             return Ok(zed::Command {
                 command: path,
                 args: binary_args.unwrap_or(default_args),

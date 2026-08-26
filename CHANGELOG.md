@@ -2,7 +2,7 @@
 
 # Unreleased
 
-- Prefer a locally provided language server over the extension-managed npm install: use `lsp.graphql.binary.path` from settings when configured (honoring `binary.arguments` and `binary.env`), otherwise a `graphql-lsp` binary found on the worktree PATH. The npm-managed `graphql-language-service-cli` remains the fallback. #26
+- Support locally provided language servers as an alternative to the extension-managed npm install: set `lsp.graphql.binary.path` in settings (honoring `binary.arguments` and `binary.env`), or set `lsp.graphql.settings.use_system_binary: true` to use a `graphql-lsp` binary from the worktree PATH. Both are opt-in — without configuration the extension-managed `graphql-language-service-cli` is used exactly as before. #26
 
 # 1.0.5 - 2026-06-09
 

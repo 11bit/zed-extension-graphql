@@ -58,10 +58,23 @@ By default, the extension installs and manages its own copy of [`graphql-languag
      }
    }
    ```
-2. A `graphql-lsp` binary found on the worktree's `PATH`.
-3. The extension-managed npm installation (the default behavior).
+2. A `graphql-lsp` binary found on the worktree's `PATH` — only when explicitly enabled:
+   ```json
+   {
+     "lsp": {
+       "graphql": {
+         "settings": {
+           "use_system_binary": true
+         }
+       }
+     }
+   }
+   ```
+3. The extension-managed npm installation (the default behavior — used whenever neither option above is configured).
 
 When a local server is selected, no npm version check or installation is performed.
+
+> **Note:** the stock `graphql-lsp` entry point shipped by `graphql-language-service-cli` (including global npm installs) fails on Node.js 22+ with `Cannot find module 'core-js/es6'`; the extension-managed install works around this by invoking `dist/cli.js` directly. If you enable `use_system_binary` or set `binary.path`, make sure the binary you provide starts under your Node version.
 
 ## Releasing
 
