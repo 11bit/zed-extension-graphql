@@ -3,6 +3,7 @@ use zed_extension_api::{self as zed, settings::LspSettings, Result};
 
 const SERVER_PATH: &str = "node_modules/graphql-language-service-cli/dist/cli.js";
 const PACKAGE_NAME: &str = "graphql-language-service-cli";
+const BINARY_NAME: &str = "graphql-lsp";
 
 struct GraphQLExtension;
 
@@ -61,30 +62,56 @@ impl zed::Extension for GraphQLExtension {
         language_server_id: &zed_extension_api::LanguageServerId,
         worktree: &zed_extension_api::Worktree,
     ) -> zed_extension_api::Result<zed_extension_api::Command> {
-        let server_path = self.server_script_path(language_server_id)?;
-
-        let config_dir = LspSettings::for_worktree(language_server_id.as_ref(), worktree)
+        let server_settings = LspSettings::for_worktree(language_server_id.as_ref(), worktree)
             .ok()
-            .and_then(|lsp_settings| lsp_settings.settings)
+            .and_then(|lsp_settings| lsp_settings.settings);
+
+        // `binary.path`, `binary.arguments` and `binary.env` are applied by Zed itself before
+        // the extension is consulted (see `LspStore::get_language_server_binary`), so there is
+        // nothing to do for them here. `use_system_binary` lives in the free-form `settings`
+        // block precisely so that it does reach us.
+        let use_system_binary = server_settings
+            .as_ref()
+            .and_then(|settings| settings.get("use_system_binary"))
+            .and_then(|value| value.as_bool())
+            .unwrap_or(false);
+
+        let config_dir = server_settings
             .and_then(|settings| settings.get("config_dir").cloned())
             .and_then(|r| r.as_str().map(|s| s.to_string()))
             .unwrap_or(worktree.root_path().to_string());
 
+        let args = vec![
+            "server".to_string(),
+            "-m".to_string(),
+            "stream".to_string(),
+            "-c".to_string(),
+            config_dir,
+        ];
+        let env = vec![("GRAPHQL_NO_NAME_WARNING".to_string(), "true".to_string())];
+
+        if use_system_binary {
+            if let Some(path) = worktree.which(BINARY_NAME) {
+                return Ok(zed::Command {
+                    command: path,
+                    args,
+                    env,
+                });
+            }
+        }
+
+        let server_path = self.server_script_path(language_server_id)?;
+        let mut node_args = vec![env::current_dir()
+            .unwrap()
+            .join(&server_path)
+            .to_string_lossy()
+            .to_string()];
+        node_args.extend(args);
+
         Ok(zed::Command {
             command: zed::node_binary_path()?,
-            args: vec![
-                env::current_dir()
-                    .unwrap()
-                    .join(&server_path)
-                    .to_string_lossy()
-                    .to_string(),
-                "server".to_string(),
-                "-m".to_string(),
-                "stream".to_string(),
-                "-c".to_string(),
-                config_dir,
-            ],
-            env: vec![("GRAPHQL_NO_NAME_WARNING".to_string(), "true".to_string())],
+            args: node_args,
+            env,
         })
     }
 }
