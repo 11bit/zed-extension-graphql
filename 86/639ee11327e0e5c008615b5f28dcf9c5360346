@@ -1,0 +1,23 @@
+CHANGELOG.md
+  s_2ec7b965d2bffd::t_4a79edbeafc3b1 5-6
+README.md
+  s_2ec7b965d2bffd::t_ec5701b1f41bda 43-81,83-86,88,90
+src/graphql.rs
+  s_2ec7b965d2bffd::t_a10f434832b60d 65-72,84,91-100,104,109,113
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "86639ee11327e0e5c008615b5f28dcf9c5360346",
+  "prompts": {},
+  "sessions": {
+    "s_2ec7b965d2bffd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d31ef340-53a0-448e-bf54-40cfc085f98c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ivan Buryak <ivan.buryak@gmail.com>"
+    }
+  }
+}
