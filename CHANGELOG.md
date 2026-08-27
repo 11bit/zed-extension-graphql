@@ -1,9 +1,9 @@
 # Changelog
 
-# Unreleased
+# 1.0.6 - 2026-08-27
 
 - Add `lsp.graphql.settings.use_system_binary`: when set to `true`, a `graphql-lsp` binary found on the worktree `PATH` is used instead of the extension-managed npm install, with no version check or install performed. Opt-in — without it nothing changes, and the extension-managed `graphql-language-service-cli` is used exactly as before. #26
-- Document that `lsp.graphql.binary.path` is applied by Zed before the extension is consulted: `binary.arguments` is required alongside it, `config_dir` does not apply, and `binary.env` is not merged with the extension's defaults. Also document that setting `binary.arguments` without `binary.path` breaks the managed install.
+- Document that `lsp.graphql.binary.arguments` must be set alongside `binary.path`, and must not be set without it.
 
 # 1.0.5 - 2026-06-09
 
