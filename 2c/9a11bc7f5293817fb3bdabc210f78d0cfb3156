@@ -1,0 +1,21 @@
+extension.toml
+  s_2ec7b965d2bffd::t_a4bf66f21ebcf1 3
+CHANGELOG.md
+  s_2ec7b965d2bffd::t_a4bf66f21ebcf1 3,6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "2c9a11bc7f5293817fb3bdabc210f78d0cfb3156",
+  "prompts": {},
+  "sessions": {
+    "s_2ec7b965d2bffd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d31ef340-53a0-448e-bf54-40cfc085f98c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Ivan Buryak <ivan.buryak@gmail.com>"
+    }
+  }
+}
