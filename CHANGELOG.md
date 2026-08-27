@@ -2,7 +2,8 @@
 
 # Unreleased
 
-- Support locally provided language servers as an alternative to the extension-managed npm install: set `lsp.graphql.binary.path` in settings (honoring `binary.arguments` and `binary.env`), or set `lsp.graphql.settings.use_system_binary: true` to use a `graphql-lsp` binary from the worktree PATH. Both are opt-in — without configuration the extension-managed `graphql-language-service-cli` is used exactly as before. #26
+- Add `lsp.graphql.settings.use_system_binary`: when set to `true`, a `graphql-lsp` binary found on the worktree `PATH` is used instead of the extension-managed npm install, with no version check or install performed. Opt-in — without it nothing changes, and the extension-managed `graphql-language-service-cli` is used exactly as before. #26
+- Document that `lsp.graphql.binary.path` is applied by Zed before the extension is consulted: `binary.arguments` is required alongside it, `config_dir` does not apply, and `binary.env` is not merged with the extension's defaults. Also document that setting `binary.arguments` without `binary.path` breaks the managed install.
 
 # 1.0.5 - 2026-06-09
 

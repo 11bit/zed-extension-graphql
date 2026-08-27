@@ -40,43 +40,54 @@ By default, the LSP attempts to load a config file from the workspace root direc
 
 ### Using a local language server
 
-By default, the extension installs and manages its own copy of [`graphql-language-service-cli`](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli) via npm. To use a locally provided server instead (e.g. from Nix, direnv, mise, or asdf environments, or when working offline), the extension resolves the server in this order:
+By default, the extension installs and manages its own copy of [`graphql-language-service-cli`](https://github.com/graphql/graphiql/tree/main/packages/graphql-language-service-cli) via npm. There are two ways to use a locally provided server instead (e.g. from Nix, direnv, mise, or asdf environments, or when working offline).
 
-1. The binary configured in Zed settings:
-   ```json
-   {
-     "lsp": {
-       "graphql": {
-         "binary": {
-           "path": "/usr/local/bin/graphql-lsp",
-           // optional, defaults to ["server", "-m", "stream", "-c", "<config_dir>"]
-           "arguments": ["server", "-m", "stream", "-c", "/path/to/config-dir"],
-           // optional, merged with the default { "GRAPHQL_NO_NAME_WARNING": "true" }
-           "env": { "NODE_OPTIONS": "--max-old-space-size=4096" }
-         }
-       }
-     }
-   }
-   ```
-2. A `graphql-lsp` binary found on the worktree's `PATH` — only when explicitly enabled:
-   ```json
-   {
-     "lsp": {
-       "graphql": {
-         "settings": {
-           "use_system_binary": true
-         }
-       }
-     }
-   }
-   ```
-3. The extension-managed npm installation (the default behavior — used whenever neither option above is configured).
+#### `use_system_binary` — pick up `graphql-lsp` from `PATH`
 
-`binary.arguments` fully replaces the default arguments, including `-c <config_dir>` — if you also use the `config_dir` setting, pass `-c` yourself. `binary.env` is merged with the defaults, with your values taking precedence. Both apply to whichever server ends up selected, including the extension-managed npm fallback (where arguments are appended after the script path).
+When enabled, the extension looks for a `graphql-lsp` binary on the worktree's `PATH` and uses it instead of the managed install. No npm version check, npm request, or managed install is performed. If nothing is found on `PATH`, the extension falls back to the managed install.
 
-When a local server is selected, no npm version check or installation is performed.
+```json
+{
+  "lsp": {
+    "graphql": {
+      "settings": {
+        "use_system_binary": true
+      }
+    }
+  }
+}
+```
 
-> **Note:** the stock `graphql-lsp` entry point shipped by `graphql-language-service-cli` (including global npm installs) fails on Node.js 22+ with `Cannot find module 'core-js/es6'`; the extension-managed install works around this by invoking `dist/cli.js` directly. If you enable `use_system_binary` or set `binary.path`, make sure the binary you provide starts under your Node version.
+The server is launched with the same defaults as the managed install: arguments `server -m stream -c <config_dir>` (honoring the `config_dir` setting) and `GRAPHQL_NO_NAME_WARNING=true`.
+
+This is opt-in. Without it, a `graphql-lsp` on `PATH` is ignored — see the note below for why.
+
+#### `binary.path` — point Zed at a specific binary
+
+This is handled by Zed itself, not by this extension, and works with any version of it. Zed launches the configured binary directly, so **the extension's defaults do not apply**:
+
+```json
+{
+  "lsp": {
+    "graphql": {
+      "binary": {
+        "path": "/usr/local/bin/graphql-lsp",
+        "arguments": ["server", "-m", "stream", "-c", "/path/to/config-dir"],
+        "env": { "NODE_OPTIONS": "--max-old-space-size=4096" }
+      }
+    }
+  }
+}
+```
+
+- `arguments` is **required**. If you omit it the server is launched with no arguments at all and exits immediately with `At least one command is required.`
+- `config_dir` is ignored. Pass `-c <dir>` yourself in `arguments`.
+- `env` is **not** merged with `GRAPHQL_NO_NAME_WARNING=true`. Add it yourself if you want it.
+- No npm version check or installation is performed.
+
+> **Do not set `binary.arguments` without `binary.path`.** Zed replaces the arguments of the managed command too, which drops the path to `dist/cli.js` and leaves the server unable to start (`Error: Cannot find module '<worktree>/server'`). To change the config directory for the managed install, use the `config_dir` setting instead.
+
+> **Note:** the stock `graphql-lsp` entry point shipped by `graphql-language-service-cli` (including global npm installs) fails on Node.js 22+ with `Cannot find module 'core-js/es6'`; the extension-managed install works around this by invoking `dist/cli.js` directly. This is why `use_system_binary` is opt-in — picking up such a binary automatically would replace a working server with a broken one. If you enable it or set `binary.path`, make sure the binary you provide starts under your Node version.
 
 ## Releasing
 
